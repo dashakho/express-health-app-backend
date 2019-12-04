@@ -25,14 +25,17 @@ router.get('/doctors', requireToken, (req, res, next) => {
       return doctors.map(doctor => doctor.toObject())
     })
     .then(doctors => {
-      doctors.map(doctor => {
+      return doctors.filter(doctor => {
+        console.log(req.user._id, doctor.owner)
         if (JSON.stringify(req.user._id) === JSON.stringify(doctor.owner)) {
-          doctor.editable = true
+          /* doctor.editable = true
         } else {
           doctor.editable = false
+        } */
+          return doctor
         }
       })
-      return doctors
+      /* return doctors */
     })
     // respond with status 200 and JSON of the examples
     .then(doctors => res.status(200).json({ doctors: doctors }))
