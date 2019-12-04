@@ -15,7 +15,7 @@ curl "${API}${URL_PATH}" \
       "last_name": "'"${LAST_NAME}"'",
       "city": "'"${CITY}"'",
       "state": "'"${STATE}"'",
-      "postal_code": "'"${POSTAL_CODE}"'",
+      "postal_code": "'"${POSTAL_CODE}"'"
     }
   }'
 

@@ -12,11 +12,13 @@ const requireOwnership = customErrors.requireOwnership
 const removeBlanks = require('../../lib/remove_blank_fields')
 const requireToken = passport.authenticate('bearer', { session: false })
 const router = express.Router()
+
 // INDEX
 // GET /examples
 router.get('/doctors', requireToken, (req, res, next) => {
   DoctorEntry.find()
     .then(doctors => {
+      // console.log(doctors)
       // `examples` will be an array of Mongoose documents
       // we want to convert each one to a POJO, so we use `.map` to
       // apply `.toObject` to each one
@@ -40,6 +42,7 @@ router.get('/doctors', requireToken, (req, res, next) => {
 // SHOW
 // GET /examples/5a7db6c74d55bc51bdf39793
 router.get('/doctors/:id', requireToken, (req, res, next) => {
+  console.log('test 2')
   // req.params.id will be set based on the `:id` in the route
   DoctorEntry.findById(req.params.id)
     .then(handle404)
@@ -51,6 +54,7 @@ router.get('/doctors/:id', requireToken, (req, res, next) => {
 // CREATE
 // POST /examples
 router.post('/doctors', requireToken, (req, res, next) => {
+  console.log('test 4')
   // set owner of new example to be current user
   req.body.doctor.owner = req.user.id
   DoctorEntry.create(req.body.doctor)
