@@ -26,7 +26,7 @@ router.get('/doctors', requireToken, (req, res, next) => {
     })
     .then(doctors => {
       return doctors.filter(doctor => {
-        console.log(req.user._id, doctor.owner)
+        // console.log(req.user._id, doctor.owner)
         if (JSON.stringify(req.user._id) === JSON.stringify(doctor.owner)) {
           /* doctor.editable = true
         } else {
@@ -45,7 +45,7 @@ router.get('/doctors', requireToken, (req, res, next) => {
 // SHOW
 // GET /examples/5a7db6c74d55bc51bdf39793
 router.get('/doctors/:id', requireToken, (req, res, next) => {
-  console.log('test 2')
+  // console.log('test 2')
   // req.params.id will be set based on the `:id` in the route
   DoctorEntry.findById(req.params.id)
     .then(handle404)
@@ -57,7 +57,7 @@ router.get('/doctors/:id', requireToken, (req, res, next) => {
 // CREATE
 // POST /examples
 router.post('/doctors', requireToken, (req, res, next) => {
-  console.log('test 4')
+  // console.log('test 4')
   // set owner of new example to be current user
   req.body.doctor.owner = req.user.id
   DoctorEntry.create(req.body.doctor)
